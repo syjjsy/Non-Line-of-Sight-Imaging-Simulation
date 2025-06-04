@@ -1,31 +1,43 @@
 # SimNLOS — Transient‑Data Simulator for Confocal Non‑Line‑of‑Sight Imaging
-[![DOI](https://zenodo.org/badge/123456789.svg)](https://zenodo.org/badge/latestdoi/123456789)
+
 
 > MATLAB implementation for physics‑accurate transient–data synthesis in confocal NLOS imaging.  
 > **Main entry point:** `SimNLOS.m`  
 > **Repository:** <https://github.com/syjjsy/Non-Line-of-Sight-Imaging-Simulation>
 
 ---
-
-## 1  Overview
-This simulator generates synthetic transient measurements from depth (and optional albedo) maps by emulating a confocal NLOS capture system.  
-It is designed for **algorithm benchmarking**, **data augmentation**, and **deep‑learning pre‑training** where collecting real NLOS data is impractical.
-
-Key characteristics  
-* FFT‑accelerated 3‑D convolution grounded in the light‑cone transform  
-* User‑defined **spatial / temporal resolution** (default 128 × 128 × 1024, 32 ps per bin)  
-* Realistic noise model: Poisson photon noise and optional temporal jitter  
-* Batch processing of multiple scenes with a single function call  
-* Pure MATLAB: no external toolboxes beyond the standard distribution
+> **Entry point:** `SimNLOS.m` | MATLAB R2020a + recommended  
+> Generates physics‑accurate transient volumes from depth maps for algorithm benchmarking and deep‑learning pre‑training.
 
 ---
 
-## 2  Repository Structure
-```text
-Non-Line-of-Sight-Imaging-Simulation/
-├── SimNLOS.m                # ⇦ main script (edit parameters here)
-├── resamplingOperator.m
-├── definePsf.m
-├── utils/                   # helper functions
-├── docs/                    # figures / GIFs for README
-└── README.md
+## 1 Features
+* FFT‑accelerated 3‑D convolution grounded in the light‑cone transform  
+* Adjustable **spatial / temporal resolution** (default 128 × 128 × 1024, 32 ps per bin)  
+* Poisson photon noise & optional 70 ps FWHM temporal jitter  
+* Single‑call batch processing of multiple scenes  
+* Core functions distributed as **P‑code (`*.p`)** for efficient execution
+
+---
+
+## 2 File List
+| File | Type | Role |
+| ---- | ---- | ---- |
+| `SimNLOS.m` | MATLAB script | **Main driver** — set parameters & launch simulation |
+| `data_augmentation.p` | P‑code | Generates depth / albedo augmentations & writes output |
+| `definePsf.p` | P‑code | Builds the 3‑D confocal point‑spread function |
+| `depth_to_transient.p` | P‑code | Converts depth maps to transient volumes |
+| `depth_to_vol.p` | P‑code | Helper for depth‑to‑voxel mapping |
+| `resamplingOperator.p` | P‑code | Constructs temporal resampling matrix |
+
+
+> **关于 P‑code**  
+> `*.p` 文件是 MATLAB 编译代码，无法查看源，但可直接像 `.m` 文件一样调用。
+
+---
+
+## 3 Quick Start
+
+```bash
+git clone https://github.com/syjjsy/Non-Line-of-Sight-Imaging-Simulation.git
+cd Non-Line-of-Sight-Imaging-Simulation

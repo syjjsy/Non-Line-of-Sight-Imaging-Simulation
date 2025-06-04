@@ -41,3 +41,9 @@
 ```bash
 git clone https://github.com/syjjsy/Non-Line-of-Sight-Imaging-Simulation.git
 cd Non-Line-of-Sight-Imaging-Simulation
+```
+---
+
+## 4 Benchmark Data Set (ShapeNet NLOS‑7)
+**GoogleDrive:** <https://drive.google.com/drive/folders/1XW61uC3f8R3AIN-a-rtvYFBaD3JGuWWa?usp=sharing>
+**KuaKe:** <https://pan.quark.cn/s/735e87ce2618>

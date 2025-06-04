@@ -1,0 +1,26 @@
+close all
+clear all
+
+param.c = 3e8;
+param.albedo_path=('D:\data\NLOS\fanzhaolv——test\al\');%反照率路径
+param.srcdir_name = ('D:\data\NLOS\fanzhaolv——test\depth\');%深度图路径
+param.outpath='D:\data\NLOS\fanzhaolv——test\out\';%输出路径
+param.bin_resolution =32e-12;
+param.width = 1.0;
+param.N = 128;
+param.M = 1024;
+param.numpic=1;
+param.range = param.M .* param.c .* param.bin_resolution;
+[param.mtx, param.mtxi] = resamplingOperator(param.M);
+param.psf = definePsf(param.N, param.M, param.width./param.range);
+param.fpsf = fftn(param.psf);
+param.FWHM = 70e-12; % Full Width Half Max parameter (70ps for Stanford data)
+param.alpha = param.FWHM / 2.35 / param.bin_resolution;
+% 2*ceil(2*param.alpha)+1
+param.use_albedo_img=0;%是否使用输入的反照率，若是设为1；若设为0则全局反照率一致
+param.poisson_noise = 1;%是否加入泊松噪声
+param.temporal_blur = 1;%是否加入时间抖动
+param.poisson_intensity=25;%泊松噪声强度
+param.Normalization=10^4 .* 20;
+data_augmentation(param);
+

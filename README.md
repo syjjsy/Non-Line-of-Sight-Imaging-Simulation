@@ -4,6 +4,7 @@
 > MATLAB implementation for physics‑accurate transient–data synthesis in confocal NLOS imaging.  
 > **Main entry point:** `SimNLOS.m`  
 > **Repository:** <https://github.com/syjjsy/Non-Line-of-Sight-Imaging-Simulation>
+>  **Manuscript:** <https://arxiv.org/abs/2506.03747>
 
 ---
 > **Entry point:** `SimNLOS.m` | MATLAB R2020a + recommended  
